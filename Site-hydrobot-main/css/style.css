@@ -265,3 +265,27 @@ body{
     width: 16px;
   }
 }
+/* 🔧 Responsividade para o seletor de idioma */
+@media (max-width: 768px) {
+  /* Esconde as bandeiras no topo no mobile */
+  .lang-switch {
+    display: none;
+  }
+
+  /* Mostra dentro do menu aberto */
+  #nav-links.open + .lang-switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 12px auto;
+    gap: 10px;
+  }
+
+  .lang-switch button {
+    padding: 6px;
+  }
+
+  .lang-switch img {
+    width: 20px;
+  }
+}
