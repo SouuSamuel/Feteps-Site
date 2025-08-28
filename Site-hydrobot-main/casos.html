@@ -21,46 +21,54 @@
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <nav id="nav-links" class="nav-links" aria-label="Links principais">
-      <a href="index.html">Home</a>
-      <a href="projeto.html">Projeto</a>
-      <a href="casos.html" class="active">Casos</a>
+      <a href="index.html" data-i18n="home">Home</a>
+      <a href="projeto.html" data-i18n="project">Projeto</a>
+      <a href="casos.html" class="active" data-i18n="cases">Casos</a>
     </nav>
+
+    <!-- Bandeiras -->
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="pt" aria-label="Português">
+        <img src="https://flagcdn.com/w20/br.png" alt="Português">
+      </button>
+      <button class="lang-btn" data-lang="en" aria-label="English">
+        <img src="https://flagcdn.com/w20/us.png" alt="English">
+      </button>
+      <button class="lang-btn" data-lang="es" aria-label="Español">
+        <img src="https://flagcdn.com/w20/es.png" alt="Español">
+      </button>
+    </div>
   </header>
 
   <main>
     <section class="section container">
-      <h1 class="section-title reveal">Galeria de Casos de Incêndio</h1>
-      <p class="reveal">Clique nas imagens para ampliar.</p>
+      <h1 class="section-title reveal" data-i18n="casesTitle">Galeria de Casos de Incêndio</h1>
+      <p class="reveal" data-i18n="casesInstructions">Clique nas imagens para ampliar.</p>
 
       <div class="grid three gallery">
-        <a class="gallery-item reveal" href="images/caso1.jpeg" data-type="image" data-caption="Um curto-circuito em um carregador de celular provocou um incêndio em um apartamento.">
+        <a class="gallery-item reveal" href="images/caso1.jpeg" data-type="image" data-caption-key="case1Caption">
           <img src="images/caso1.jpeg" class="case-photo" alt="Caso 1" />
         </a>
 
-        <a class="gallery-item reveal delay-1" href="images/caso2.jpeg" data-type="image" data-caption="O incêndio começou quando o sobrinho do proprietário fumava deitado na cama e deixou a bituca acesa cair sobre o colchão.">
+        <a class="gallery-item reveal delay-1" href="images/caso2.jpeg" data-type="image" data-caption-key="case2Caption">
           <img src="images/caso2.jpeg" class="case-photo" alt="Caso 2" />
         </a>
 
-        <a class="gallery-item reveal delay-2" href="images/caso3.jpg" data-type="image" data-caption="O incêndio no Instituto Butantan em 2010 foi provavelmente causado por um curto-circuito ou sobrecarga elétrica, agravado pela ausência de um sistema automático de combate a incêndios (Na epoca já existia technologia para esse tipo de situação)">
-          <img src="images/caso3.jpg" class="case-photo" alt="Caso 3 (placeholder)" />
+        <a class="gallery-item reveal delay-2" href="images/caso3.jpg" data-type="image" data-caption-key="case3Caption">
+          <img src="images/caso3.jpg" class="case-photo" alt="Caso 3" />
         </a>
       </div>
     </section>
 
-    <!-- Seção com vídeo do depoimento -->
     <section class="section container testimonial">
-      <h2 class="section-title reveal">Depoimento de um Bombeiro</h2>
-
+      <h2 class="section-title reveal" data-i18n="firefighterTestimony">Depoimento de um Bombeiro</h2>
       <div class="testimonial-card reveal">
-        <!-- player inline -->
         <video class="testimonial-video" controls poster="images/thumb-video.jpg" preload="metadata" aria-label="Depoimento do bombeiro">
           <source src="videos/bomba.mp4" type="video/mp4" />
-          Seu navegador não suporta reproduzir este vídeo.
+          <span data-i18n="videoNotSupported">Seu navegador não suporta reproduzir este vídeo.</span>
         </video>
-
-        <!-- botão para abrir o mesmo vídeo em modal/lightbox -->
         <div class="testimonial-actions">
-          <button id="openVideoModal" class="btn primary" type="button" aria-haspopup="dialog">
+          <button id="openVideoModal" class="btn primary" type="button" aria-haspopup="dialog" data-i18n="firefighterName">
             NOME DO BOMBEIRO
           </button>
         </div>
@@ -68,7 +76,6 @@
     </section>
   </main>
 
-  <!-- Lightbox / Modal (para imagens e vídeo) -->
   <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Visualizador">
     <div class="lightbox-inner" role="document">
       <button class="lightbox-close" aria-label="Fechar">✕</button>
@@ -82,7 +89,7 @@
 
   <footer class="footer">
     <div class="container small">
-      <p>© <span data-year></span> Hydro Bot.</p>
+      <p>© <span data-year></span> Hydro Bot. <span data-i18n="footer">Todos os direitos reservados.</span></p>
     </div>
   </footer>
 </body>
