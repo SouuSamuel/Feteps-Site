@@ -247,3 +247,21 @@ body{
     height: auto;
   }
 }
+/* 🔧 Ajustes específicos para mobile */
+@media (max-width: 768px) {
+  .lang-switch {
+    position: absolute;
+    right: 60px;   /* fica antes do botão hamburguer */
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 4px;
+  }
+
+  .lang-switch button {
+    padding: 3px;
+  }
+
+  .lang-switch img {
+    width: 16px;
+  }
+}

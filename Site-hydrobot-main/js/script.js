@@ -212,7 +212,7 @@
       whyText: "The name Hydro Bot combines two concepts: \"Hydro\", referring to the water used to fight fire, and \"Bot\", for robot. It represents an autonomous robot that uses water to extinguish fires - <strong>agility</strong>, <strong>precision</strong>, and <strong>safety</strong>.",
       how: "How it works",
       howItem1: "Hydro Bot detects fire with sensors, navigates autonomously through corridors, and uses a water spray from the reservoir to extinguish the fire.",
-      howItem2: "The entire system is controlled by an Arduino and powered by batteries.",
+      howItem2: "The system can be controlled via the app or through its own system.",
       
       // Highlights
       highlights: "Highlights",
@@ -268,7 +268,7 @@
       whyText: "El nombre Hydro Bot une dos conceptos: \"Hydro\", que remite al agua usada para apagar el fuego, y \"Bot\", de robot. Representa un robot autónomo que utiliza agua para extinguir incendios - <strong>agilidad</strong>, <strong>precisión</strong> y <strong>seguridad</strong>.",
       how: "Cómo funciona",
       howItem1: "Hydro Bot detecta fuego con sensores, navega autónomamente por pasillos, y usa un spray de agua del reservorio para extinguir el incendio.",
-      howItem2: "Todo el sistema está controlado por un Arduino y alimentado por baterías.",
+      howItem2: "El sistema se puede controlar a través de la aplicación o mediante su propio sistema.",
       
       // Highlights
       highlights: "Aspectos destacados",
