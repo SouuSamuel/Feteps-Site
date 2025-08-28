@@ -230,3 +230,20 @@ body{
   max-width: 900px;
   margin: 2rem auto;
 }
+/* Ajustes para mobile */
+@media (max-width: 600px) {
+  .lang-switch {
+    gap: 4px;              /* diminui espaçamento */
+    margin-left: 8px;      /* encosta mais no canto */
+  }
+
+  .lang-switch button {
+    padding: 4px;          /* reduz área clicável */
+    border-radius: 6px;
+  }
+
+  .lang-switch img {
+    width: 16px;           /* bandeiras menores */
+    height: auto;
+  }
+}
