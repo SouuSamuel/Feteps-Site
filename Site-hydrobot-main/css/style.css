@@ -5,6 +5,8 @@
   --muted:#c3c7d1;
   --primary:#00bcd4;
   --danger:#E63946;
+  --success:#4CAF50;
+  --warning:#FF9800;
   --card:#111216;
   --border:rgba(255,255,255,.08);
   --shadow:0 10px 30px rgba(0,0,0,.4);
@@ -97,18 +99,18 @@ body{
   animation:float 12s ease-in-out infinite alternate;
 }
 .project-photo {
-  max-width: 490px; /* largura máxima */
-  height: auto;     /* mantém a proporção */
+  max-width: 490px;
+  height: auto;
   display: block;
-  margin: 0 auto;   /* centraliza a imagem */
-  border-radius: 15px; /* arredonda as bordas */
+  margin: 0 auto;
+  border-radius: 15px;
 }
 
 .hero-media .main-photo {
-  width: 80%;       /* diminui para 80% do container, ajuste conforme necessário */
-  max-width: 400px; /* opcional: define um tamanho máximo */
-  height: auto;     /* mantém a proporção da imagem */
-  border-radius: 12px; /* opcional: mantém o estilo arredondado */
+  width: 80%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 12px;
 }
 
 @keyframes float{from{transform:translateY(-10px)} to{transform:translateY(10px)}}
@@ -117,11 +119,12 @@ body{
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:10px;
   padding:10px 14px; border-radius:12px; font-weight:700; text-decoration:none;
-  border:1px solid var(--border); transition:.25s; cursor:pointer;
+  border:1px solid var(--border); transition:.25s; cursor:pointer; font-size:14px;
 }
 .btn.primary{background:linear-gradient(45deg, var(--danger), var(--primary)); color:#fff; box-shadow:0 0 24px rgba(0,188,212,.18)}
 .btn.ghost{color:var(--text); background:transparent}
 .btn:hover{transform:translateY(-1px); filter:saturate(1.05)}
+.btn:disabled{opacity:0.6; cursor:not-allowed; transform:none}
 
 /* Cards & grids */
 .grid{display:grid; gap:20px}
@@ -230,28 +233,126 @@ body{
   max-width: 900px;
   margin: 2rem auto;
 }
-/* Ajustes para mobile */
-@media (max-width: 600px) {
-  .lang-switch {
-    gap: 4px;              /* diminui espaçamento */
-    margin-left: 8px;      /* encosta mais no canto */
-  }
 
-  .lang-switch button {
-    padding: 4px;          /* reduz área clicável */
-    border-radius: 6px;
-  }
-
-  .lang-switch img {
-    width: 16px;           /* bandeiras menores */
-    height: auto;
-  }
+/* =========================
+   CHAT SYSTEM STYLES
+========================= */
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, var(--danger), var(--primary));
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,188,212,0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  border: none;
 }
-/* 🔧 Ajustes específicos para mobile */
+.chat-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,188,212,0.4);
+}
+
+.chat-box {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: none;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  z-index: 999;
+  backdrop-filter: blur(10px);
+}
+.chat-box.active {
+  display: flex;
+}
+
+.chat-header {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text);
+  text-align: center;
+  font-size: 16px;
+}
+
+#chat-input {
+  width: 100%;
+  height: 80px;
+  resize: none;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+#chat-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0,188,212,0.1);
+}
+#chat-input::placeholder {
+  color: var(--muted);
+}
+
+#send-question {
+  align-self: flex-end;
+  padding: 10px 16px;
+  font-size: 14px;
+  min-width: 80px;
+}
+
+.chat-feedback {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: none;
+  transition: all 0.3s ease;
+}
+.chat-feedback.success {
+  color: var(--success);
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+.chat-feedback.error {
+  color: var(--danger);
+  background: rgba(230, 57, 70, 0.1);
+  border: 1px solid rgba(230, 57, 70, 0.2);
+}
+.chat-feedback.info {
+  color: var(--primary);
+  background: rgba(0, 188, 212, 0.1);
+  border: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .lang-switch {
     position: absolute;
-    right: 60px;   /* fica antes do botão hamburguer */
+    right: 60px;
     top: 50%;
     transform: translateY(-50%);
     gap: 4px;
@@ -264,39 +365,8 @@ body{
   .lang-switch img {
     width: 16px;
   }
-}
-/* 🔧 Responsividade para o seletor de idioma */
-@media (max-width: 768px) {
-  /* Esconde as bandeiras no topo no mobile */
-  .lang-switch {
-    display: none;
-  }
 
-  /* Mostra dentro do menu aberto */
-  #nav-links.open + .lang-switch {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 12px auto;
-    gap: 10px;
-  }
-
-  .lang-switch button {
-    padding: 6px;
-  }
-
-  .lang-switch img {
-    width: 20px;
-  } 
-}
-/* ===== Ajustes Mobile e Responsividade ===== */
-
-/* Grid responsivo */
-@media (max-width: 768px) {
-  .grid.two {
-    grid-template-columns: 1fr;
-  }
-  .grid.three {
+  .grid.two, .grid.three {
     grid-template-columns: 1fr;
   }
 
@@ -309,22 +379,17 @@ body{
     font-size: 1.8rem;
   }
 
-  .hero-content .lead {
-    font-size: 1rem;
-  }
-
   .hero-media .main-photo {
     width: 100%;
     max-width: 320px;
     margin: 20px auto 0;
   }
 
-  /* Ajuste do container */
   .container {
     width: 94%;
   }
 
-  /* Navbar */
+  /* Navbar mobile */
   .nav-links {
     position: absolute;
     top: 100%;
@@ -356,19 +421,6 @@ body{
     font-size: 1.1rem;
   }
 
-  /* Lang switch: esconde no topo, mostra no menu */
-  .lang-switch {
-    display: none;
-  }
-
-  .nav-links.open + .lang-switch {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 12px 0;
-  }
-
-  /* Ajuste de seções */
   .section {
     padding: 50px 0;
   }
@@ -377,14 +429,22 @@ body{
     font-size: 1.5rem;
   }
 
-  /* Ajuste das imagens das galerias */
-  .case-photo, .project-photo {
-    width: 100%;
-    height: auto;
+  /* Chat mobile adjustments */
+  .chat-box {
+    width: calc(100vw - 40px);
+    right: 20px;
+    left: 20px;
+    bottom: 90px;
+  }
+
+  .chat-btn {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
   }
 }
 
-/* Extra para telas muito pequenas (até 480px) */
+/* Extra small screens */
 @media (max-width: 480px) {
   .hero-content h1 {
     font-size: 1.5rem;
@@ -392,5 +452,17 @@ body{
   .btn {
     padding: 10px 12px;
     font-size: 0.95rem;
+  }
+  
+  .chat-box {
+    width: calc(100vw - 20px);
+    right: 10px;
+    left: 10px;
+    padding: 16px;
+  }
+  
+  .chat-btn {
+    right: 15px;
+    bottom: 15px;
   }
 }

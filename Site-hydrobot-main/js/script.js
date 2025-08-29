@@ -1,4 +1,4 @@
-/* Hydro Bot enhanced interactions + i18n */
+/* Hydro Bot enhanced interactions + i18n - VERSÃO LIMPA */
 (function () {
   const $ = (s, ctx = document) => ctx.querySelector(s);
   const $$ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
@@ -348,7 +348,7 @@
   });
 })();
 
-// Fallback loader
+// Fallback loader - garante que o loader desapareça
 setTimeout(() => {
   const loader = document.querySelector("#loader");
   if (loader) {

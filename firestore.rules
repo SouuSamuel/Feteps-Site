@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // REGRAS TEMPORÁRIAS PARA TESTES - LIBERA ESCRITA NA COLEÇÃO perguntas
+    match /perguntas/{document} {
+      allow read, write: if true;
+    }
+    
+    // Para outras coleções, mantém restrito
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+// IMPORTANTE: Após confirmar que está funcionando, altere para regras mais seguras:
+// 
+// match /perguntas/{document} {
+//   allow read: if request.auth != null;
+//   allow create: if request.auth != null 
+//     && request.resource.data.keys().hasAll(['texto', 'data'])
+//     && request.resource.data.texto is string
+//     && request.resource.data.texto.size() > 0
+//     && request.resource.data.texto.size() <= 1000;
+// }
