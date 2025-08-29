@@ -287,5 +287,110 @@ body{
 
   .lang-switch img {
     width: 20px;
+  } 
+}
+/* ===== Ajustes Mobile e Responsividade ===== */
+
+/* Grid responsivo */
+@media (max-width: 768px) {
+  .grid.two {
+    grid-template-columns: 1fr;
+  }
+  .grid.three {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content .lead {
+    font-size: 1rem;
+  }
+
+  .hero-media .main-photo {
+    width: 100%;
+    max-width: 320px;
+    margin: 20px auto 0;
+  }
+
+  /* Ajuste do container */
+  .container {
+    width: 94%;
+  }
+
+  /* Navbar */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(10,10,10,0.95);
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+    z-index: 100;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+
+  /* Lang switch: esconde no topo, mostra no menu */
+  .lang-switch {
+    display: none;
+  }
+
+  .nav-links.open + .lang-switch {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 12px 0;
+  }
+
+  /* Ajuste de seções */
+  .section {
+    padding: 50px 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  /* Ajuste das imagens das galerias */
+  .case-photo, .project-photo {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Extra para telas muito pequenas (até 480px) */
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+  .btn {
+    padding: 10px 12px;
+    font-size: 0.95rem;
   }
 }
