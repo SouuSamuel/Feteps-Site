@@ -330,21 +330,36 @@
 
 let currentLang = localStorage.getItem("lang") || "pt";
 
-// Cria botão flutuante
+// Cria botão flutuante acessível
 const voiceBtn = document.createElement("button");
 voiceBtn.id = "voice-access";
-voiceBtn.innerText = "🔊 Ler Página";
+voiceBtn.innerHTML = "🔊 <span class='sr-only'>Ouvir o conteúdo da página</span>";
+voiceBtn.setAttribute("aria-label", "Ouvir o conteúdo da página");
 voiceBtn.style.position = "fixed";
-voiceBtn.style.bottom = "100px";
+voiceBtn.style.bottom = "90px";
 voiceBtn.style.right = "20px";
-voiceBtn.style.padding = "12px 16px";
-voiceBtn.style.borderRadius = "12px";
+voiceBtn.style.width = "44px";
+voiceBtn.style.height = "44px";
+voiceBtn.style.borderRadius = "50%";
 voiceBtn.style.background = "linear-gradient(45deg, #E63946, #00bcd4)";
 voiceBtn.style.color = "#fff";
-voiceBtn.style.fontWeight = "bold";
+voiceBtn.style.fontSize = "20px";
+voiceBtn.style.display = "flex";
+voiceBtn.style.alignItems = "center";
+voiceBtn.style.justifyContent = "center";
 voiceBtn.style.cursor = "pointer";
 voiceBtn.style.zIndex = "2000";
+voiceBtn.style.border = "none";
+voiceBtn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
+voiceBtn.style.transition = "transform 0.2s ease";
+voiceBtn.addEventListener("focus", () => {
+  voiceBtn.style.outline = "2px solid #fff";
+});
+voiceBtn.addEventListener("blur", () => {
+  voiceBtn.style.outline = "none";
+});
 document.body.appendChild(voiceBtn);
+
 
 // Mapeia vozes por idioma
 function getVoiceForLang(lang) {
