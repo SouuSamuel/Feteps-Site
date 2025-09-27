@@ -141,6 +141,7 @@
       home: "Home",
       project: "Projeto",
       cases: "Casos",
+      documentation: "Documentação",
       contact: "Contato",
       heroTitle:
         "Inovação no combate e <span class='accent'>prevenção de incêndios</span>",
@@ -187,11 +188,27 @@
       contactText: "Envie um e-mail para",
       footer: "Todos os direitos reservados.",
       loading: "Carregando…",
+
+      // Documentação
+      docTitle: "Documentação do Projeto Hydro Bot",
+      docSubtitle: "Acompanhe as etapas do projeto e visualize o mapa mental que organiza nossas ideias.",
+      step1Title: "Etapa 1: Planejamento",
+      step1Text: "Definimos objetivos, funcionalidades do Hydro Bot e a estrutura do mapa mental para organizar as ideias.",
+      step2Title: "Etapa 2: Desenvolvimento",
+      step2Text: "Implementação dos sensores, bombeamento de água e integração do sistema com controle remoto e aplicativo.",
+      step3Title: "Etapa 3: Testes",
+      step3Text: "Realizamos simulações de incêndio, ajustes de robótica e validação do funcionamento do Hydro Bot.",
+      step4Title: "Etapa 4: Documentação",
+      step4Text: "Criação desta página com mapa mental interativo, registro de etapas e instruções para visualização do projeto.",
+
+      // Instagram
+      followUs: "Siga nosso Instagram:"
     },
     en: {
       home: "Home",
       project: "Project",
       cases: "Cases",
+      documentation: "Documentation",
       contact: "Contact",
       heroTitle:
         "Innovation in fire <span class='accent'>prevention and control</span>",
@@ -235,11 +252,27 @@
       contactText: "Send an email to",
       footer: "All rights reserved.",
       loading: "Loading…",
+
+      // Documentation
+      docTitle: "Hydro Bot Project Documentation",
+      docSubtitle: "Follow the project steps and explore the mind map that organizes our ideas.",
+      step1Title: "Step 1: Planning",
+      step1Text: "We defined objectives, Hydro Bot functionalities, and the mind map structure to organize ideas.",
+      step2Title: "Step 2: Development",
+      step2Text: "Implementation of sensors, water pumping system, and integration with remote control and app.",
+      step3Title: "Step 3: Testing",
+      step3Text: "We performed fire simulations, robotics adjustments, and validation of Hydro Bot’s operation.",
+      step4Title: "Step 4: Documentation",
+      step4Text: "Creation of this page with an interactive mind map, step records, and project viewing instructions.",
+
+      // Instagram
+      followUs: "Follow us on Instagram:"
     },
     es: {
       home: "Inicio",
       project: "Proyecto",
       cases: "Casos",
+      documentation: "Documentación",
       contact: "Contacto",
       heroTitle:
         "Innovación en <span class='accent'>prevención y control de incendios</span>",
@@ -258,7 +291,7 @@
       highlights: "Aspectos destacados",
       highlight1: "Respuesta Rápida",
       highlight1Text: "Minimizamos el tiempo crítico entre detección y combate.",
-      highlight2: "Escalable",
+      highlight2: "Escalável",
       highlight2Text:
         "Del laboratorio a la industria, adaptable a diferentes escenarios.",
       highlight3: "Monitoreo",
@@ -286,6 +319,21 @@
       contactText: "Envíe un correo a",
       footer: "Todos los derechos reservados.",
       loading: "Cargando…",
+
+      // Documentación
+      docTitle: "Documentación del Proyecto Hydro Bot",
+      docSubtitle: "Sigue las etapas del proyecto y visualiza el mapa mental que organiza nuestras ideas.",
+      step1Title: "Etapa 1: Planificación",
+      step1Text: "Definimos objetivos, funcionalidades del Hydro Bot y la estructura del mapa mental para organizar las ideas.",
+      step2Title: "Etapa 2: Desarrollo",
+      step2Text: "Implementación de sensores, bombeo de agua e integración del sistema con control remoto y aplicación.",
+      step3Title: "Etapa 3: Pruebas",
+      step3Text: "Realizamos simulaciones de incendios, ajustes de robótica y validación del funcionamiento del Hydro Bot.",
+      step4Title: "Etapa 4: Documentación",
+      step4Text: "Creación de esta página con mapa mental interactivo, registro de etapas e instrucciones para visualizar el proyecto.",
+
+      // Instagram
+      followUs: "Síguenos en Instagram:"
     },
   };
 
@@ -330,7 +378,7 @@
 
 let currentLang = localStorage.getItem("lang") || "pt";
 
-// Cria botão flutuante acessível
+// Botão flutuante para leitura em voz
 const voiceBtn = document.createElement("button");
 voiceBtn.id = "voice-access";
 voiceBtn.innerHTML = "🔊 <span class='sr-only'>Ouvir o conteúdo da página</span>";
@@ -351,15 +399,7 @@ voiceBtn.style.cursor = "pointer";
 voiceBtn.style.zIndex = "2000";
 voiceBtn.style.border = "none";
 voiceBtn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
-voiceBtn.style.transition = "transform 0.2s ease";
-voiceBtn.addEventListener("focus", () => {
-  voiceBtn.style.outline = "2px solid #fff";
-});
-voiceBtn.addEventListener("blur", () => {
-  voiceBtn.style.outline = "none";
-});
 document.body.appendChild(voiceBtn);
-
 
 // Mapeia vozes por idioma
 function getVoiceForLang(lang) {
@@ -408,3 +448,41 @@ setTimeout(() => {
     loader.classList.add("hide");
   }
 }, 5000);
+// Chat balloon toggle
+(function(){
+  const chatBtn = document.getElementById('chat-btn');
+  const chatBox = document.getElementById('chat-box');
+  if(chatBtn && chatBox){
+    chatBtn.addEventListener('click', () => {
+      chatBox.classList.toggle('active');
+    });
+  }
+})();
+
+/* ==== public i18n helpers ==== */
+try {
+  window.setAppLanguage = (lang) => {
+    const btn = document.querySelector('.lang-btn[data-lang="'+lang+'"]');
+    if (btn) btn.click();
+  };
+} catch (e) {}
+/* ==== chat toggle fallback ==== */
+(function(){
+  function bind() {
+    const chatBtn = document.getElementById('chat-btn');
+    const chatBox = document.getElementById('chat-box');
+    if (chatBtn && chatBox) {
+      if (!chatBtn.__bound) {
+        chatBtn.addEventListener('click', () => {
+          chatBox.classList.toggle('active');
+          const input = document.getElementById('chat-input');
+          if (chatBox.classList.contains('active') && input) input.focus();
+        });
+        chatBtn.__bound = true;
+      }
+    }
+  }
+  window.__bindChatToggle = bind;
+  document.addEventListener('DOMContentLoaded', bind);
+  window.addEventListener('load', bind);
+})();
