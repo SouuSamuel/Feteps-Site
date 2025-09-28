@@ -4,13 +4,103 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Documentação - Hydro Bot</title>
-  <meta name="description" content="Documentação do projeto Hydro Bot – etapas e mapa mental" />
+  <meta name="description" content="Documentação do projeto Hydro Bot — etapas e mapa mental" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* Estilo específico da página Documentação */
+    :root{
+      --bg:#0a0a0a;
+      --bg-accent:#0e0e10;
+      --text:#f7f7ff;
+      --muted:#c3c7d1;
+      --primary:#00bcd4;
+      --danger:#E63946;
+      --success:#4CAF50;
+      --warning:#FF9800;
+      --card:#111216;
+      --border:rgba(255,255,255,.08);
+      --shadow:0 10px 30px rgba(0,0,0,.4);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 1200px at 80% -10%, rgba(0,188,212,.12), transparent 60%),
+        radial-gradient(900px 900px at -10% 40%, rgba(230,57,70,.12), transparent 50%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container{width:min(1080px, 92%); margin-inline:auto;}
+    .container.small{width:min(880px,92%)}
+
+    .section{padding:80px 0}
+    .section-title{font-size:clamp(1.6rem, 2.5vw, 2.2rem); margin:0 0 24px; letter-spacing:.3px}
+
+    /* Navbar */
+    .navbar{
+      position:sticky; top:0; z-index:50;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 24px; background:rgba(10,10,10,.65);
+      backdrop-filter:saturate(140%) blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-weight:800; letter-spacing:.3px}
+    .brand-logo{width:36px; height:36px; object-fit:contain; filter:drop-shadow(0 3px 10px rgba(0,188,212,.35))}
+    .brand-name{display:inline-block; transform:translateY(1px)}
+
+    .nav-links{display:flex; gap:12px}
+    .nav-links a{
+      color:var(--muted); text-decoration:none; padding:10px 14px; border-radius:12px; transition:.25s;
+    }
+    .nav-links a:hover{color:var(--text); background:rgba(255,255,255,.06)}
+    .nav-links a.active{color:var(--text); background:linear-gradient(45deg, rgba(230,57,70,.25), rgba(0,188,212,.25));}
+
+    .nav-toggle{display:none; background:none;border:0;cursor:pointer}
+    .nav-toggle .bar{display:block; width:24px; height:2px; background:var(--text); margin:5px 0; transition:.3s}
+
+    /* Language Switch */
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      margin-left: 16px;
+    }
+    .lang-switch button {
+      background: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lang-switch button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+    }
+    .lang-switch button.active {
+      background: linear-gradient(45deg, rgba(230,57,70,.25), rgba(0,188,212,.25));
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(0,188,212,.3);
+    }
+    .lang-switch img {
+      width: 20px;
+      height: auto;
+      display: block;
+    }
+
+    /* Main content */
     main {
       padding: 40px 20px;
       display: flex;
@@ -50,7 +140,7 @@
       border-radius: 10px;
     }
 
-    /* Cards explicando as etapas (opcional) */
+    /* Cards explicando as etapas */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -79,11 +169,451 @@
     .card p {
       font-size: 0.95rem;
     }
+    
+    /* Tabela de Componentes - Design Melhorado */
+    .components-table {
+      width: 100%;
+      margin: 40px auto;
+      max-width: 1000px;
+      text-align: left;
+    }
+
+    .components-table h2 {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .hydrobot-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+
+    .hydrobot-table th {
+      padding: 18px 16px;
+      background: linear-gradient(135deg, var(--primary), #0097a7);
+      color: var(--bg);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    .hydrobot-table th:first-child {
+      width: 100px;
+      text-align: center;
+    }
+
+    .hydrobot-table td {
+      padding: 20px 16px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.2s ease;
+    }
+
+    .hydrobot-table tr:hover td {
+      background-color: rgba(0, 188, 212, 0.03);
+    }
+
+    .hydrobot-table tr:nth-child(even) td {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+    
+    .hydrobot-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .component-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .component-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 188, 212, 0.2);
+    }
+
+    .component-name {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .component-function {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Portrait/shorts video */
+    .pitch-video {
+      margin: 40px auto;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .portrait-video {
+      width: 100%;
+      max-width: 480px;
+      margin: 24px auto;
+    }
+
+    .portrait-video video {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: #000;
+      object-fit: cover;
+    }
+
+    /* Social section */
+    .social-section {
+      text-align: center;
+      padding: 24px 16px;
+      background: linear-gradient(45deg, rgba(0,188,212,0.1), rgba(230,57,70,0.1));
+      border-top: 1px solid var(--border);
+    }
+    .social-section p {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .instagram-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(45deg, var(--danger), var(--primary));
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .instagram-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .instagram-btn .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    .footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(255,255,255,.02); margin-top:40px;}
+
+    /* Chat system */
+    .chat-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, var(--danger), var(--primary));
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,188,212,0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    .chat-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,188,212,0.4);
+    }
+
+    .chat-box {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: none;
+      flex-direction: column;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      z-index: 999;
+      backdrop-filter: blur(10px);
+    }
+    .chat-box.active {
+      display: flex;
+    }
+
+    .chat-header {
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+      text-align: center;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    #chat-input {
+      width: 100%;
+      height: 80px;
+      resize: none;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+    #chat-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(0,188,212,0.1);
+    }
+    #chat-input::placeholder {
+      color: var(--muted);
+    }
+
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:10px 14px; border-radius:12px; font-weight:700; text-decoration:none;
+      border:1px solid var(--border); transition:.25s; cursor:pointer; font-size:14px;
+    }
+    .btn.primary {
+      background:linear-gradient(45deg, var(--danger), var(--primary)); 
+      color:#fff; 
+      box-shadow:0 0 24px rgba(0,188,212,.18);
+      align-self: flex-end;
+      min-width: 80px;
+    }
+    .btn:hover{transform:translateY(-1px); filter:saturate(1.05)}
+    .btn:disabled{opacity:0.6; cursor:not-allowed; transform:none}
+
+    .chat-feedback {
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      padding: 6px 8px;
+      border-radius: 6px;
+      display: none;
+      transition: all 0.3s ease;
+    }
+    .chat-feedback.success {
+      color: var(--success);
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+    .chat-feedback.error {
+      color: var(--danger);
+      background: rgba(230, 57, 70, 0.1);
+      border: 1px solid rgba(230, 57, 70, 0.2);
+    }
+    .chat-feedback.info {
+      color: var(--primary);
+      background: rgba(0, 188, 212, 0.1);
+      border: 1px solid rgba(0, 188, 212, 0.2);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .lang-switch {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        gap: 4px;
+      }
+
+      .lang-switch button {
+        padding: 3px;
+      }
+
+      .lang-switch img {
+        width: 16px;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(10,10,10,0.95);
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        padding: 16px 0;
+        border-top: 1px solid var(--border);
+        display: none;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: block;
+        z-index: 100;
+      }
+
+      .nav-links a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 1.1rem;
+      }
+
+      .section {
+        padding: 50px 0;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 20px 10px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p.lead {
+        font-size: 1rem;
+      }
+
+      /* Tabela mobile */
+      .hydrobot-table {
+        border-radius: 12px;
+      }
+
+      .hydrobot-table th,
+      .hydrobot-table td {
+        padding: 12px 10px;
+      }
+
+      .hydrobot-table th {
+        font-size: 0.8rem;
+      }
+
+      .component-image {
+        width: 50px;
+        height: 50px;
+      }
+
+      .component-name {
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+      }
+
+      .component-function {
+        font-size: 0.9rem;
+      }
+
+      .hydrobot-table th:first-child {
+        width: 80px;
+      }
+
+      /* Chat mobile */
+      .chat-box {
+        width: calc(100vw - 40px);
+        right: 20px;
+        left: 20px;
+        bottom: 90px;
+      }
+
+      .chat-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+      }
+
+      .portrait-video {
+        max-width: 420px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .components-table {
+        margin: 30px auto;
+      }
+
+      .hydrobot-table th,
+      .hydrobot-table td {
+        padding: 10px 8px;
+      }
+
+      .component-image {
+        width: 45px;
+        height: 45px;
+      }
+
+      .component-name {
+        font-size: 0.9rem;
+      }
+
+      .component-function {
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+
+      .hydrobot-table th:first-child {
+        width: 70px;
+      }
+
+      .chat-box {
+        width: calc(100vw - 20px);
+        right: 10px;
+        left: 10px;
+        padding: 16px;
+      }
+      
+      .chat-btn {
+        right: 15px;
+        bottom: 15px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .portrait-video {
+        max-width: 420px;
+      }
+    }
   </style>
 </head>
 <body class="theme-dark">
 
-  <!-- Header / Navbar igual ao site principal -->
   <header class="navbar">
     <a class="brand" href="index.html">
       <img src="images/logo.png" alt="Hydro Bot" class="brand-logo" />
@@ -109,12 +639,10 @@
     <h1 data-i18n="docTitle">Documentação do Projeto Hydro Bot</h1>
     <p class="lead" data-i18n="docSubtitle">Acompanhe as etapas do projeto e visualize o mapa mental que organiza nossas ideias.</p>
 
-    <!-- Iframe do Miro -->
     <div class="iframe-container">
       <iframe src="https://miro.com/app/live-embed/uXjVJHPfjl4=/?embedMode=view_only_without_ui&moveToViewport=-850,-71,2124,1054&embedId=672875784971" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
     </div>
 
-    <!-- Cards com etapas do projeto -->
     <div class="cards">
       <div class="card">
         <h3>Etapa 1: Planejamento</h3>
@@ -133,18 +661,112 @@
         <p>Criação desta página com mapa mental interativo, registro de etapas e instruções para visualização do projeto.</p>
       </div>
     </div>
-  
-<section class="pitch-video section container">
-  <h2 class="section-title" data-i18n="firefighterTestimony">Video Pitch do Hydro Bot</h2>
-  <div class="portrait-video">
-    <video class="testimonial-video" controls playsinline preload="metadata" aria-label="Vídeo do pitch do Hydro Bot">
-      <source src="videos/pitch.mp4" type="video/mp4"/>
-      <span data-i18n="videoNotSupported">Seu navegador não suporta reproduzir este vídeo.</span>
-    </video>
-  </div>
-</section>
+    
+    <section class="components-table section container">
+      <h2 class="section-title" data-i18n="componentsTitle">Componentes Essenciais do HydroBot</h2>
+      <div class="table-wrapper">
+        <table class="hydrobot-table">
+          <thead>
+            <tr>
+              <th>Imagem</th>
+              <th>Componente</th>
+              <th>Função Principal no Carrinho</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img src="https://circuitpython.org/assets/images/boards/large/ai-thinker-esp32-cam.jpg" 
+                     alt="ESP32 Camera" 
+                     class="component-image"
+                     loading="lazy">
+              </td>
+              <td>
+                <div class="component-name">Placa de Visão (Câmera ESP32)</div>
+              </td>
+              <td>
+                <div class="component-function">Núcleo de Inteligência e Visão. Processa imagens para identificar o fogo e permite a <strong>visualização remota</strong> via aplicativo.</div>
+              
+            </tr>
+            <tr>
+              <td>
+                <img src="https://cdn.awsli.com.br/600x1000/2406/2406079/produto/365113962/sem-t-tulo-n2hq5fcqyb.png" 
+                     alt="Flame Sensor" 
+                     class="component-image"
+                     loading="lazy">
+              </td>
+              <td>
+                <div class="component-name">Sensores de Chama</div>
+              </td>
+              <td>
+                <div class="component-function">Detecção Rápida. Identificam o fogo para o acionamento do combate no <strong>Modo Automático</strong>.</div>
+              </td>
+            </tr>
+            <tr>
+              
+            </tr>
+            <tr>
+              <td>
+                <img src="https://www.usinainfo.com.br/1020023-thickbox_default/mini-bomba-de-agua-submersa-3v-5v-jt100-15lmin.jpg" 
+                     alt="Water Pump" 
+                     class="component-image"
+                     loading="lazy">
+              </td>
+              <td>
+                <div class="component-name">Bomba d'Água Submersa (JT100)</div>
+              </td>
+              <td>
+                <div class="component-function">Acionamento do Combate. Impulsiona a água do reservatório, sendo ativada tanto pelo sistema <strong>Automático</strong> quanto pelo <strong>Aplicativo</strong>.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="images/sistema.jpg" 
+                     alt="Hydraulic System" 
+                     class="component-image"
+                     loading="lazy">
+              </td>
+              <td>
+                <div class="component-name">Sistema Hidráulico Adaptado</div>
+              </td>
+              <td>
+                <div class="component-function">Sistema de Lançamento. Tubulação e bico <strong>reaproveitados do carrinho de brinquedo</strong> e adaptados para o lançamento eficiente da água.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="images/brinquedo.jpeg" 
+                     alt="Robot Base" 
+                     class="component-image"
+                     loading="lazy">
+              </td>
+              <td>
+                <div class="component-name">Estrutura Base</div>
+              </td>
+              <td>
+                <div class="component-function">Reaproveitamento. <strong>Carrinho de Bombeiro de Brinquedo</strong> reutilizado e adaptado para ser a base do robô e alojar os componentes e o tanque.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="images/tela.jpeg" 
+                     alt="Mobile App" 
+                     class="component-image"
+                     loading="lazy">
+              </td>
+              <td>
+                <div class="component-name">Aplicativo de Controle</div>
+              </td>
+              <td>
+                <div class="component-function">Interface Remota. Permite ao usuário o <strong>Controle Manual</strong>, incluindo o acesso à câmera e o acionamento direto da bomba d'água.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-</main>
+  </main>
 
   
 <section class="social-section">
@@ -163,14 +785,12 @@
 
 <footer class="footer">
     <div class="container small">
-      <p>© <span data-year></span> Hydro Bot. Todos os direitos reservados.</p>
+      <p>&copy; <span data-year></span> Hydro Bot. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-<!-- Botão flutuante do chat -->
 <div id="chat-btn" class="chat-btn" aria-label="Abrir chat">💬</div>
 
-<!-- Caixa de perguntas -->
 <div id="chat-box" class="chat-box" role="dialog" aria-label="Enviar pergunta">
   <div class="chat-header">Envie sua pergunta - Digite seu nome antes da pergunta</div>
   <textarea id="chat-input" placeholder="Digite sua pergunta..."></textarea>
@@ -179,9 +799,500 @@
 </div>
 
 
-  <script src="js/script.js"></script>
+  <script>
+    /* Hydro Bot enhanced interactions + i18n - VERSÃO LIMPA */
+    (function () {
+      const $ = (s, ctx = document) => ctx.querySelector(s);
+      const $ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
 
-<!-- Firebase v9 modular - Sistema de Chat -->
+      // Loader
+      window.addEventListener("load", () => {
+        const loader = $("#loader");
+        if (loader) {
+          setTimeout(() => loader.classList.add("hide"), 200);
+        }
+      });
+
+      // Mobile nav toggle
+      const toggle = $(".nav-toggle");
+      const nav = $("#nav-links");
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          const open = nav.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", String(open));
+        });
+      }
+
+      // Year
+      $("[data-year]").forEach((s) => (s.textContent = new Date().getFullYear()));
+
+      // Back to top
+      const back = $("#backToTop");
+      if (back) {
+        const onScroll = () => {
+          if (window.scrollY > 400) back.classList.add("show");
+          else back.classList.remove("show");
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        back.addEventListener("click", () =>
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        );
+        onScroll();
+      }
+
+      // Reveal on scroll
+      const reveals = $(".reveal");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        reveals.forEach((el) => io.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add("visible"));
+      }
+
+      // Lightbox para galeria
+      function setupLightbox() {
+        const items = $(".gallery-item");
+        if (!items.length) return;
+
+        const lb = document.createElement("div");
+        lb.className = "lightbox";
+        lb.innerHTML =
+          '<div class="lb-wrapper"><img alt=""><div class="caption"></div></div>';
+        document.body.appendChild(lb);
+
+        const img = $("img", lb);
+        const caption = $(".caption", lb);
+
+        function open(src, captionKey) {
+          img.src = src;
+          const currentLang = localStorage.getItem("lang") || "pt";
+          const captionText =
+            translations[currentLang] && translations[currentLang][captionKey]
+              ? translations[currentLang][captionKey]
+              : captionKey || "";
+          caption.textContent = captionText;
+          lb.classList.add("open");
+          lb.setAttribute("aria-hidden", "false");
+        }
+
+        function close() {
+          lb.classList.remove("open");
+          lb.setAttribute("aria-hidden", "true");
+          img.src = "";
+        }
+
+        lb.addEventListener("click", (e) => {
+          if (e.target === lb) close();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") close();
+        });
+
+        items.forEach((a) => {
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            const captionKey =
+              a.getAttribute("data-caption-key") || a.getAttribute("data-caption");
+            open(a.getAttribute("href"), captionKey);
+          });
+        });
+      }
+      setupLightbox();
+
+      // Tilt effect
+      function setupTilt() {
+        const tiltEls = $(".tilt");
+        tiltEls.forEach((el) => {
+          let rect;
+          function updateRect() {
+            rect = el.getBoundingClientRect();
+          }
+          updateRect();
+          window.addEventListener("resize", updateRect);
+
+          el.addEventListener("mousemove", (e) => {
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            const rx = (0.5 - y) * 6;
+            const ry = (x - 0.5) * 6;
+            el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+          });
+          el.addEventListener("mouseleave", () => {
+            el.style.transform =
+              "perspective(800px) rotateX(0deg) rotateY(0deg)";
+          });
+        });
+      }
+      setupTilt();
+
+      /* ======================
+           SISTEMA DE I18N
+      ====================== */
+      const translations = {
+        pt: {
+          home: "Home",
+          project: "Projeto",
+          cases: "Casos",
+          documentation: "Documentação",
+          contact: "Contato",
+          heroTitle:
+            "Inovação no combate e <span class='accent'>prevenção de incêndios</span>",
+          heroSubtitle:
+            "O Hydro Bot integra sensores, visão computacional e resposta rápida para proteger pessoas e ambientes críticos.",
+          seeProject: "Ver Projeto",
+          seeCases: "Casos de Incêndio",
+          why: "Por que Hydro Bot?",
+          whyText:
+            'O nome Hydro Bot une dois conceitos: "Hydro", que remete à água usada no combate ao fogo, e "Bot", de robô. Assim, ele representa um robô autônomo que utiliza água para extinguir incêndios - <strong>agilidade</strong>, <strong>precisão</strong> e <strong>segurança</strong>.',
+          how: "Como funciona",
+          howItem1:
+            "O Hydro Bot detecta fogo com sensores, navega sozinho por corredores, e usa um spray de água do reservatório para apagar o incêndio.",
+          howItem2:
+            "Todo o sistema é controlado por um Arduino e alimentado por baterias.",
+          highlights: "Destaques",
+          highlight1: "Resposta Rápida",
+          highlight1Text: "Minimizamos o tempo crítico entre detecção e combate.",
+          highlight2: "Escalável",
+          highlight2Text:
+            "Do laboratório à indústria, adaptável a diferentes cenários.",
+          highlight3: "Monitoramento",
+          highlight3Text:
+            "Dados e imagens para análise posterior e melhoria contínua.",
+          architecture: "Arquitetura",
+          architectureText:
+            "Integração de sensores, câmera, módulo de decisão e atuadores para resposta automática.",
+          sensor1: "Sensor de fumaça/temperatura",
+          sensor2: "Visão computacional para detecção de chamas",
+          sensor3: "Acionamento de bomba/aspersão",
+          projectPhotos: "Fotos do projeto:",
+          seeFireCases: "Ver sobre casos de incêndios",
+          casesTitle: "Galeria de Casos de Incêndio",
+          casesInstructions: "Clique nas imagens para ampliar.",
+          case1Caption:
+            "Um curto-circuito em um carregador de celular provocou um incêndio em um apartamento.",
+          case2Caption:
+            "O incêndio começou quando o sobrinho do proprietário fumava deitado na cama e deixou a bituca acesa cair sobre o colchão.",
+          case3Caption:
+            "O incêndio no Instituto Butantan em 2010 foi provavelmente causado por um curto-circuito ou sobrecarga elétrica.",
+          firefighterTestimony: "Depoimento de um Bombeiro",
+          firefighterName: "NOME DO BOMBEIRO",
+          videoNotSupported: "Seu navegador não suporta reproduzir este vídeo.",
+          contactText: "Envie um e-mail para",
+          footer: "Todos os direitos reservados.",
+          loading: "Carregando…",
+
+          // Documentação
+          docTitle: "Documentação do Projeto Hydro Bot",
+          docSubtitle: "Acompanhe as etapas do projeto e visualize o mapa mental que organiza nossas ideias.",
+          step1Title: "Etapa 1: Planejamento",
+          step1Text: "Definimos objetivos, funcionalidades do Hydro Bot e a estrutura do mapa mental para organizar as ideias.",
+          step2Title: "Etapa 2: Desenvolvimento",
+          step2Text: "Implementação dos sensores, bombeamento de água e integração do sistema com controle remoto e aplicativo.",
+          step3Title: "Etapa 3: Testes",
+          step3Text: "Realizamos simulações de incêndio, ajustes de robótica e validação do funcionamento do Hydro Bot.",
+          step4Title: "Etapa 4: Documentação",
+          step4Text: "Criação desta página com mapa mental interativo, registro de etapas e instruções para visualização do projeto.",
+          componentsTitle: "Componentes Essenciais do HydroBot",
+
+          // Instagram
+          followUs: "Siga nosso Instagram:"
+        },
+        en: {
+          home: "Home",
+          project: "Project",
+          cases: "Cases",
+          documentation: "Documentation",
+          contact: "Contact",
+          heroTitle:
+            "Innovation in fire <span class='accent'>prevention and control</span>",
+          heroSubtitle:
+            "Hydro Bot integrates sensors, computer vision, and rapid response to protect people and critical environments.",
+          seeProject: "See Project",
+          seeCases: "Fire Cases",
+          why: "Why Hydro Bot?",
+          whyText:
+            'The name Hydro Bot combines two concepts: "Hydro", referring to the water used to fight fire, and "Bot", for robot. It represents an autonomous robot that uses water to extinguish fires - <strong>agility</strong>, <strong>precision</strong>, and <strong>safety</strong>.',
+          how: "How it works",
+          howItem1:
+            "Hydro Bot detects fire with sensors, navigates autonomously through corridors, and uses a water spray from the reservoir to extinguish the fire.",
+          howItem2: "The system can be controlled via the app or through its own system.",
+          highlights: "Highlights",
+          highlight1: "Quick Response",
+          highlight1Text: "We minimize the critical time between detection and action.",
+          highlight2: "Scalable",
+          highlight2Text: "From labs to industry, adaptable to various scenarios.",
+          highlight3: "Monitoring",
+          highlight3Text: "Data and images for analysis and continuous improvement.",
+          architecture: "Architecture",
+          architectureText:
+            "Integration of sensors, camera, decision module and actuators for automatic response.",
+          sensor1: "Smoke/temperature sensor",
+          sensor2: "Computer vision for flame detection",
+          sensor3: "Pump/sprinkler activation",
+          projectPhotos: "Project photos:",
+          seeFireCases: "See about fire cases",
+          casesTitle: "Fire Cases Gallery",
+          casesInstructions: "Click on images to enlarge.",
+          case1Caption:
+            "A short circuit in a cell phone charger caused a fire in an apartment.",
+          case2Caption:
+            "The fire started when the owner's nephew was smoking lying in bed and let the lit cigarette butt fall on the mattress.",
+          case3Caption:
+            "The fire at the Butantan Institute in 2010 was probably caused by a short circuit or electrical overload.",
+          firefighterTestimony: "Firefighter Testimonial",
+          firefighterName: "FIREFIGHTER NAME",
+          videoNotSupported: "Your browser does not support playing this video.",
+          contactText: "Send an email to",
+          footer: "All rights reserved.",
+          loading: "Loading…",
+
+          // Documentation
+          docTitle: "Hydro Bot Project Documentation",
+          docSubtitle: "Follow the project steps and explore the mind map that organizes our ideas.",
+          step1Title: "Step 1: Planning",
+          step1Text: "We defined objectives, Hydro Bot functionalities, and the mind map structure to organize ideas.",
+          step2Title: "Step 2: Development",
+          step2Text: "Implementation of sensors, water pumping system, and integration with remote control and app.",
+          step3Title: "Step 3: Testing",
+          step3Text: "We performed fire simulations, robotics adjustments, and validation of Hydro Bot's operation.",
+          step4Title: "Step 4: Documentation",
+          step4Text: "Creation of this page with an interactive mind map, step records, and project viewing instructions.",
+          componentsTitle: "HydroBot Essential Components",
+
+          // Instagram
+          followUs: "Follow us on Instagram:"
+        },
+        es: {
+          home: "Inicio",
+          project: "Proyecto",
+          cases: "Casos",
+          documentation: "Documentación",
+          contact: "Contacto",
+          heroTitle:
+            "Innovación en <span class='accent'>prevención y control de incendios</span>",
+          heroSubtitle:
+            "Hydro Bot integra sensores, visión por computadora y respuesta rápida para proteger personas y entornos críticos.",
+          seeProject: "Ver Proyecto",
+          seeCases: "Casos de Incendio",
+          why: "¿Por qué Hydro Bot?",
+          whyText:
+            'El nombre Hydro Bot une dos conceptos: "Hydro", que remite al agua usada para apagar el fuego, y "Bot", de robot. Representa un robot autónomo que utiliza agua para extinguir incendios - <strong>agilidad</strong>, <strong>precisión</strong> y <strong>seguridad</strong>.',
+          how: "Cómo funciona",
+          howItem1:
+            "Hydro Bot detecta fuego con sensores, navega autónomamente por pasillos, y usa un spray de agua del reservorio para extinguir el incendio.",
+          howItem2:
+            "El sistema se puede controlar a través de la aplicación o mediante su propio sistema.",
+          highlights: "Aspectos destacados",
+          highlight1: "Respuesta Rápida",
+          highlight1Text: "Minimizamos el tiempo crítico entre detección y combate.",
+          highlight2: "Escalável",
+          highlight2Text:
+            "Del laboratorio a la industria, adaptable a diferentes escenarios.",
+          highlight3: "Monitoreo",
+          highlight3Text:
+            "Datos e imágenes para análisis posterior y mejora continua.",
+          architecture: "Arquitectura",
+          architectureText:
+            "Integración de sensores, cámara, módulo de decisión y actuadores para respuesta automática.",
+          sensor1: "Sensor de humo/temperatura",
+          sensor2: "Visión por computadora para detección de llamas",
+          sensor3: "Activación de bomba/aspersión",
+          projectPhotos: "Fotos del proyecto:",
+          seeFireCases: "Ver sobre casos de incendios",
+          casesTitle: "Galería de Casos de Incendio",
+          casesInstructions: "Haz clic en las imágenes para ampliar.",
+          case1Caption:
+            "Un cortocircuito en un cargador de celular provocó un incendio en un apartamento.",
+          case2Caption:
+            "El incendio comenzó cuando el sobrino del propietario fumaba acostado en la cama y dejó caer la colilla encendida sobre el colchón.",
+          case3Caption:
+            "El incendio en el Instituto Butantan en 2010 fue probablemente causado por un cortocircuito o sobrecarga eléctrica.",
+          firefighterTestimony: "Testimonio de un Bombero",
+          firefighterName: "NOMBRE DEL BOMBERO",
+          videoNotSupported: "Su navegador no soporta reproducir este video.",
+          contactText: "Envíe un correo a",
+          footer: "Todos los derechos reservados.",
+          loading: "Cargando…",
+
+          // Documentación
+          docTitle: "Documentación del Proyecto Hydro Bot",
+          docSubtitle: "Sigue las etapas del proyecto y visualiza el mapa mental que organiza nuestras ideas.",
+          step1Title: "Etapa 1: Planificación",
+          step1Text: "Definimos objetivos, funcionalidades del Hydro Bot y la estructura del mapa mental para organizar las ideas.",
+          step2Title: "Etapa 2: Desarrollo",
+          step2Text: "Implementación de sensores, bombeo de agua e integración del sistema con control remoto y aplicación.",
+          step3Title: "Etapa 3: Pruebas",
+          step3Text: "Realizamos simulaciones de incendios, ajustes de robótica y validación del funcionamiento del Hydro Bot.",
+          step4Title: "Etapa 4: Documentación",
+          step4Text: "Creación de esta página con mapa mental interactivo, registro de etapas e instrucciones para visualizar el proyecto.",
+          componentsTitle: "Componentes Esenciales del HydroBot",
+
+          // Instagram
+          followUs: "Síguenos en Instagram:"
+        },
+      };
+
+      function setLanguage(lang) {
+        const dict = translations[lang];
+        if (!dict) return;
+        $("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) {
+            if (el.tagName.toLowerCase() === "input") {
+              el.placeholder = dict[key];
+            } else {
+              el.innerHTML = dict[key];
+            }
+          }
+        });
+        $(".gallery-item").forEach((item) => {
+          const captionKey = item.getAttribute("data-caption-key");
+          if (captionKey && dict[captionKey]) {
+            item.setAttribute("data-caption", dict[captionKey]);
+          }
+        });
+        localStorage.setItem("lang", lang);
+        $(".lang-btn").forEach((btn) => btn.classList.remove("active"));
+        const activeBtn = $(`[data-lang="${lang}"]`);
+        if (activeBtn) activeBtn.classList.add("active");
+      }
+
+      const savedLang = localStorage.getItem("lang") || "pt";
+      setLanguage(savedLang);
+
+      $(".lang-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const lang = btn.getAttribute("data-lang");
+          setLanguage(lang);
+          currentLang = lang; // também atualiza a voz
+        });
+      });
+    })();
+
+    // ======= ACESSIBILIDADE PARA CEGOS =======
+
+    let currentLang = localStorage.getItem("lang") || "pt";
+
+    // Botão flutuante para leitura em voz
+    const voiceBtn = document.createElement("button");
+    voiceBtn.id = "voice-access";
+    voiceBtn.innerHTML = "🔊 <span class='sr-only'>Ouvir o conteúdo da página</span>";
+    voiceBtn.setAttribute("aria-label", "Ouvir o conteúdo da página");
+    voiceBtn.style.position = "fixed";
+    voiceBtn.style.bottom = "90px";
+    voiceBtn.style.right = "20px";
+    voiceBtn.style.width = "44px";
+    voiceBtn.style.height = "44px";
+    voiceBtn.style.borderRadius = "50%";
+    voiceBtn.style.background = "linear-gradient(45deg, #E63946, #00bcd4)";
+    voiceBtn.style.color = "#fff";
+    voiceBtn.style.fontSize = "20px";
+    voiceBtn.style.display = "flex";
+    voiceBtn.style.alignItems = "center";
+    voiceBtn.style.justifyContent = "center";
+    voiceBtn.style.cursor = "pointer";
+    voiceBtn.style.zIndex = "2000";
+    voiceBtn.style.border = "none";
+    voiceBtn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
+    document.body.appendChild(voiceBtn);
+
+    // Mapeia vozes por idioma
+    function getVoiceForLang(lang) {
+      const voices = speechSynthesis.getVoices();
+      const mapping = {
+        pt: ["pt-BR", "Google português do Brasil"],
+        en: ["en-US", "Google US English"],
+        es: ["es-ES", "Google español"],
+      };
+      const prefer = mapping[lang];
+      if (!prefer) return voices[0];
+      let voice = voices.find((v) => v.name.includes(prefer[1]));
+      if (!voice) voice = voices.find((v) => v.lang === prefer[0]);
+      return voice || voices[0];
+    }
+
+    // Função de leitura
+    function lerPagina() {
+      const synth = window.speechSynthesis;
+      if (synth.speaking) {
+        synth.cancel();
+        return;
+      }
+      const texto = document.body.innerText;
+      const utter = new SpeechSynthesisUtterance(texto);
+      utter.voice = getVoiceForLang(currentLang);
+      utter.rate = 1.0;
+      utter.pitch = 1.0;
+      synth.speak(utter);
+    }
+
+    // Clique no botão
+    voiceBtn.addEventListener("click", lerPagina);
+
+    // Atalho de teclado (Ctrl + Alt + L)
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "l") {
+        lerPagina();
+      }
+    });
+
+    // Fallback loader
+    setTimeout(() => {
+      const loader = document.querySelector("#loader");
+      if (loader) {
+        loader.classList.add("hide");
+      }
+    }, 5000);
+    // Chat balloon toggle
+    (function(){
+      const chatBtn = document.getElementById('chat-btn');
+      const chatBox = document.getElementById('chat-box');
+      if(chatBtn && chatBox){
+        chatBtn.addEventListener('click', () => {
+          chatBox.classList.toggle('active');
+        });
+      }
+    })();
+
+    /* ==== public i18n helpers ==== */
+    try {
+      window.setAppLanguage = (lang) => {
+        const btn = document.querySelector('.lang-btn[data-lang="'+lang+'"]');
+        if (btn) btn.click();
+      };
+    } catch (e) {}
+    /* ==== chat toggle fallback ==== */
+    (function(){
+      function bind() {
+        const chatBtn = document.getElementById('chat-btn');
+        const chatBox = document.getElementById('chat-box');
+        if (chatBtn && chatBox) {
+          if (!chatBtn.__bound) {
+            chatBtn.addEventListener('click', () => {
+              chatBox.classList.toggle('active');
+              const input = document.getElementById('chat-input');
+              if (chatBox.classList.contains('active') && input) input.focus();
+            });
+            chatBtn.__bound = true;
+          }
+        }
+      }
+      window.__bindChatToggle = bind;
+      document.addEventListener('DOMContentLoaded', bind);
+      window.addEventListener('load', bind);
+    })();
+  </script>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
   import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
@@ -252,3 +1363,13 @@
 </script>
 </body>
 </html>
+
+    <section class="pitch-video section container">
+      <h2 class="section-title" data-i18n="">Video Pitch do Hydro Bot</h2>
+      <div class="portrait-video">
+        <video class="testimonial-video" controls playsinline preload="metadata" aria-label="Vídeo do pitch do Hydro Bot">
+          <source src="videos/pitch.mp4" type="video/mp4"/>
+          <span data-i18n="videoNotSupported">Seu navegador não suporta reproduzir este vídeo.</span>
+        </video>
+      </div>
+    </section>
