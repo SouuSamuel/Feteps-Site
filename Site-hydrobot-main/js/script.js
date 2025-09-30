@@ -1,4 +1,4 @@
-/* Hydro Bot enhanced interactions + i18n - VERSÃO LIMPA */
+/* Hydro Bot enhanced interactions + i18n - VERSÃO UNIFICADA */
 (function () {
   const $ = (s, ctx = document) => ctx.querySelector(s);
   const $$ = (s, ctx = document) => Array.from(ctx.querySelectorAll(s));
@@ -188,8 +188,6 @@
       contactText: "Envie um e-mail para",
       footer: "Todos os direitos reservados.",
       loading: "Carregando…",
-
-      // Documentação
       docTitle: "Documentação do Projeto Hydro Bot",
       docSubtitle: "Acompanhe as etapas do projeto e visualize o mapa mental que organiza nossas ideias.",
       step1Title: "Etapa 1: Planejamento",
@@ -200,8 +198,6 @@
       step3Text: "Realizamos simulações de incêndio, ajustes de robótica e validação do funcionamento do Hydro Bot.",
       step4Title: "Etapa 4: Documentação",
       step4Text: "Criação desta página com mapa mental interativo, registro de etapas e instruções para visualização do projeto.",
-
-      // Instagram
       followUs: "Siga nosso Instagram:"
     },
     en: {
@@ -252,8 +248,6 @@
       contactText: "Send an email to",
       footer: "All rights reserved.",
       loading: "Loading…",
-
-      // Documentation
       docTitle: "Hydro Bot Project Documentation",
       docSubtitle: "Follow the project steps and explore the mind map that organizes our ideas.",
       step1Title: "Step 1: Planning",
@@ -261,11 +255,9 @@
       step2Title: "Step 2: Development",
       step2Text: "Implementation of sensors, water pumping system, and integration with remote control and app.",
       step3Title: "Step 3: Testing",
-      step3Text: "We performed fire simulations, robotics adjustments, and validation of Hydro Bot’s operation.",
+      step3Text: "We performed fire simulations, robotics adjustments, and validation of Hydro Bot's operation.",
       step4Title: "Step 4: Documentation",
       step4Text: "Creation of this page with an interactive mind map, step records, and project viewing instructions.",
-
-      // Instagram
       followUs: "Follow us on Instagram:"
     },
     es: {
@@ -319,8 +311,6 @@
       contactText: "Envíe un correo a",
       footer: "Todos los derechos reservados.",
       loading: "Cargando…",
-
-      // Documentación
       docTitle: "Documentación del Proyecto Hydro Bot",
       docSubtitle: "Sigue las etapas del proyecto y visualiza el mapa mental que organiza nuestras ideas.",
       step1Title: "Etapa 1: Planificación",
@@ -331,8 +321,6 @@
       step3Text: "Realizamos simulaciones de incendios, ajustes de robótica y validación del funcionamiento del Hydro Bot.",
       step4Title: "Etapa 4: Documentación",
       step4Text: "Creación de esta página con mapa mental interactivo, registro de etapas e instrucciones para visualizar el proyecto.",
-
-      // Instagram
       followUs: "Síguenos en Instagram:"
     },
   };
@@ -360,6 +348,7 @@
     $$(".lang-btn").forEach((btn) => btn.classList.remove("active"));
     const activeBtn = $(`[data-lang="${lang}"]`);
     if (activeBtn) activeBtn.classList.add("active");
+    window.currentLang = lang; // Exporta para uso global
   }
 
   const savedLang = localStorage.getItem("lang") || "pt";
@@ -369,77 +358,133 @@
     btn.addEventListener("click", () => {
       const lang = btn.getAttribute("data-lang");
       setLanguage(lang);
-      currentLang = lang; // também atualiza a voz
     });
   });
+
+  // Exporta currentLang globalmente
+  window.currentLang = savedLang;
 })();
 
-// ======= ACESSIBILIDADE PARA CEGOS =======
+// ======= SISTEMA DE ACESSIBILIDADE COM TOGGLE VISUAL =======
 
 let currentLang = localStorage.getItem("lang") || "pt";
 
-// Botão flutuante para leitura em voz
-const voiceBtn = document.createElement("button");
-voiceBtn.id = "voice-access";
-voiceBtn.innerHTML = "🔊 <span class='sr-only'>Ouvir o conteúdo da página</span>";
-voiceBtn.setAttribute("aria-label", "Ouvir o conteúdo da página");
-voiceBtn.style.position = "fixed";
-voiceBtn.style.bottom = "90px";
-voiceBtn.style.right = "20px";
-voiceBtn.style.width = "44px";
-voiceBtn.style.height = "44px";
-voiceBtn.style.borderRadius = "50%";
-voiceBtn.style.background = "linear-gradient(45deg, #E63946, #00bcd4)";
-voiceBtn.style.color = "#fff";
-voiceBtn.style.fontSize = "20px";
-voiceBtn.style.display = "flex";
-voiceBtn.style.alignItems = "center";
-voiceBtn.style.justifyContent = "center";
-voiceBtn.style.cursor = "pointer";
-voiceBtn.style.zIndex = "2000";
-voiceBtn.style.border = "none";
-voiceBtn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
-document.body.appendChild(voiceBtn);
+// Criar botão de voz apenas se não existir
+if (!document.getElementById('voice-access') && !document.getElementById('voice-btn')) {
+  const voiceBtn = document.createElement("button");
+  voiceBtn.id = "voice-access";
+  voiceBtn.innerHTML = "🔊";
+  voiceBtn.setAttribute("aria-label", "Ouvir o conteúdo da página");
+  voiceBtn.setAttribute("title", "Pressione Ctrl+Alt+L para ouvir");
+  voiceBtn.style.position = "fixed";
+  voiceBtn.style.bottom = "90px";
+  voiceBtn.style.right = "20px";
+  voiceBtn.style.width = "50px";
+  voiceBtn.style.height = "50px";
+  voiceBtn.style.borderRadius = "50%";
+  voiceBtn.style.background = "linear-gradient(45deg, #4CAF50, #00bcd4)";
+  voiceBtn.style.color = "#fff";
+  voiceBtn.style.fontSize = "20px";
+  voiceBtn.style.display = "flex";
+  voiceBtn.style.alignItems = "center";
+  voiceBtn.style.justifyContent = "center";
+  voiceBtn.style.cursor = "pointer";
+  voiceBtn.style.zIndex = "1000";
+  voiceBtn.style.border = "none";
+  voiceBtn.style.boxShadow = "0 4px 15px rgba(76,175,80,0.3)";
+  voiceBtn.style.transition = "all 0.3s ease";
+  document.body.appendChild(voiceBtn);
 
-// Mapeia vozes por idioma
+  // Hover effect
+  voiceBtn.addEventListener("mouseenter", () => {
+    voiceBtn.style.transform = "scale(1.05)";
+    voiceBtn.style.boxShadow = "0 6px 20px rgba(76,175,80,0.4)";
+  });
+  voiceBtn.addEventListener("mouseleave", () => {
+    voiceBtn.style.transform = "scale(1)";
+    voiceBtn.style.boxShadow = "0 4px 15px rgba(76,175,80,0.3)";
+  });
+}
+
+// Função para obter voz por idioma
 function getVoiceForLang(lang) {
   const voices = speechSynthesis.getVoices();
   const mapping = {
-    pt: ["pt-BR", "Google português do Brasil"],
-    en: ["en-US", "Google US English"],
-    es: ["es-ES", "Google español"],
+    pt: ["pt-BR", "pt"],
+    en: ["en-US", "en"],
+    es: ["es-ES", "es"],
   };
-  const prefer = mapping[lang];
-  if (!prefer) return voices[0];
-  let voice = voices.find((v) => v.name.includes(prefer[1]));
-  if (!voice) voice = voices.find((v) => v.lang === prefer[0]);
-  return voice || voices[0];
+  const preferredLangs = mapping[lang] || ["pt-BR"];
+  for (const prefLang of preferredLangs) {
+    const voice = voices.find((v) => v.lang.includes(prefLang));
+    if (voice) return voice;
+  }
+  return voices[0];
 }
 
-// Função de leitura
+// Função de leitura COM TOGGLE VISUAL
 function lerPagina() {
   const synth = window.speechSynthesis;
+  const voiceBtn = document.getElementById('voice-access') || document.getElementById('voice-btn');
+  
   if (synth.speaking) {
     synth.cancel();
+    if (voiceBtn) voiceBtn.innerHTML = "🔊";
     return;
   }
-  const texto = document.body.innerText;
-  const utter = new SpeechSynthesisUtterance(texto);
-  utter.voice = getVoiceForLang(currentLang);
-  utter.rate = 1.0;
+
+  // Extrai texto da página
+  const mainContent = document.querySelector('main');
+  const textElements = mainContent ? mainContent.querySelectorAll('h1, h2, h3, p, td, th, .component-name, .component-function') : [];
+  
+  let textToRead = '';
+  textElements.forEach(el => {
+    if (el.offsetParent !== null) {
+      textToRead += el.textContent.trim() + '. ';
+    }
+  });
+
+  if (!textToRead) {
+    textToRead = document.body.innerText;
+  }
+
+  const utter = new SpeechSynthesisUtterance(textToRead);
+  utter.voice = getVoiceForLang(window.currentLang || currentLang);
+  utter.rate = 0.9;
   utter.pitch = 1.0;
+
+  // Muda ícone quando começa
+  utter.onstart = () => {
+    if (voiceBtn) voiceBtn.innerHTML = "⏸️";
+  };
+
+  // Restaura ícone quando termina
+  utter.onend = () => {
+    if (voiceBtn) voiceBtn.innerHTML = "🔊";
+  };
+
   synth.speak(utter);
 }
 
-// Clique no botão
-voiceBtn.addEventListener("click", lerPagina);
+// Event listeners
+const voiceBtn = document.getElementById('voice-access') || document.getElementById('voice-btn');
+if (voiceBtn) {
+  voiceBtn.addEventListener("click", lerPagina);
+}
 
 // Atalho de teclado (Ctrl + Alt + L)
 document.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.altKey && e.key.toLowerCase() === "l") {
+    e.preventDefault();
     lerPagina();
   }
 });
+
+// Garantir vozes carregadas
+speechSynthesis.getVoices();
+speechSynthesis.onvoiceschanged = () => {
+  speechSynthesis.getVoices();
+};
 
 // Fallback loader
 setTimeout(() => {
@@ -448,6 +493,7 @@ setTimeout(() => {
     loader.classList.add("hide");
   }
 }, 5000);
+
 // Chat balloon toggle
 (function(){
   const chatBtn = document.getElementById('chat-btn');
@@ -455,6 +501,8 @@ setTimeout(() => {
   if(chatBtn && chatBox){
     chatBtn.addEventListener('click', () => {
       chatBox.classList.toggle('active');
+      const input = document.getElementById('chat-input');
+      if (chatBox.classList.contains('active') && input) input.focus();
     });
   }
 })();
@@ -466,23 +514,3 @@ try {
     if (btn) btn.click();
   };
 } catch (e) {}
-/* ==== chat toggle fallback ==== */
-(function(){
-  function bind() {
-    const chatBtn = document.getElementById('chat-btn');
-    const chatBox = document.getElementById('chat-box');
-    if (chatBtn && chatBox) {
-      if (!chatBtn.__bound) {
-        chatBtn.addEventListener('click', () => {
-          chatBox.classList.toggle('active');
-          const input = document.getElementById('chat-input');
-          if (chatBox.classList.contains('active') && input) input.focus();
-        });
-        chatBtn.__bound = true;
-      }
-    }
-  }
-  window.__bindChatToggle = bind;
-  document.addEventListener('DOMContentLoaded', bind);
-  window.addEventListener('load', bind);
-})();
