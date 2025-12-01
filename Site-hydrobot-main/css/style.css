@@ -569,3 +569,42 @@ body{
 
 /* Chat header small tweak for readability */
 .chat-header { line-height: 1.35; }
+
+/* ======== EVENTOS (Linha do Tempo) ======== */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  position: relative;
+  margin-top: 40px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary), var(--danger));
+  border-radius: 4px;
+  opacity: 0.5;
+}
+
+.event-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 24px 30px 60px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 13px;
+  top:
+
